@@ -6,7 +6,7 @@ RUN apk update && apk add --no-cache mariadb mariadb-client bash
 
 # Create required dirs and set ownership
 RUN mkdir -p /run/mysqld /var/lib/mysql \
-    && chown -R mysql:mysql /run/mysqld /var/lib/mysql
+    && sudo chown -R mysql:mysql /run/mysqld /var/lib/mysql
 
 # Copy init script
 COPY tools/init.sql /init.sql
