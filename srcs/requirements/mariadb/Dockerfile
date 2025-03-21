@@ -24,3 +24,5 @@ CMD ["/bin/sh", "-c", "\
   fi && \
   exec mysqld --init-file=/init.sql \
 "]
+
+#pilllu
