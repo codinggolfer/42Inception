@@ -6,7 +6,7 @@ RUN apk --no-cache add ca-certificates && update-ca-certificates
 # Now update + install tools
 RUN apk --no-cache update && apk add --no-cache curl
 
-RUN mkdir -p /var/www/wordpress
+#RUN mkdir -p /var/www/wordpress
 
 # # Download and unpack WordPress
 # WORKDIR /var/www/wordpress
