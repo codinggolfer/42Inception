@@ -1,10 +1,10 @@
 FROM alpine:3.20
 
 # FIX: install ca-certificates BEFORE apk update to fix SSL issue
-RUN apk --no-cache add ca-certificates && update-ca-certificates
+RUN apk update && add --no-cache  ca-certificates
 
 # Now update + install tools
-RUN apk --no-cache update && apk add --no-cache curl
+RUN apk update && apk add --no-cache
 
 #RUN mkdir -p /var/www/wordpress
 
