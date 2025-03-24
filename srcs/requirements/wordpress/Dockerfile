@@ -2,20 +2,20 @@ FROM alpine:3.20
 
 # Install PHP and required extensions
 RUN apk update && apk add \
-  php82 \
-  php82-fpm \
-  php82-mysqli \
-  php82-curl \
-  php82-dom \
-  php82-exif \
-  php82-fileinfo \
-  php82-mbstring \
-  php82-opcache \
-  php82-session \
-  php82-zip \
-  php82-tokenizer \
-  php82-json \
-  php82-pecl-redis \
+  php83 \
+  php83-fpm \
+  php83-mysqli \
+  php83-curl \
+  php83-dom \
+  php83-exif \
+  php83-fileinfo \
+  php83-mbstring \
+  php83-opcache \
+  php83-session \
+  php83-zip \
+  php83-tokenizer \
+  php83-json \
+  php83-pecl-redis \
   curl \
   wget \
   unzip \
