@@ -5,11 +5,7 @@ FROM alpine:3.20
 #RUN apk update && apk add --no-cache ca-certificates
 
 # Step 2: Now you can update & install everything else
-RUN apk update && apk add --no-cache \
-    curl \
-    wget \
-    unzip \
-    bash
+RUN apk update
 
 # Create folder for website
 RUN mkdir -p /var/www/wordpress
