@@ -1,11 +1,13 @@
-# Step 1: Install SSL certificates first to avoid HTTPS errors
 FROM alpine:3.20
 
-# STEP 1: Install certificates FIRST so apk can use HTTPS
-RUN apk --no-cache add ca-certificates && update-ca-certificates
+FROM alpine:3.20
 
-# STEP 2: Now you can safely run apk update + add packages
-RUN apk update && apk add --no-cache \
+# Fix SSL inside container: install certificates first
+RUN apk add --no-cache  ca-certificates
+RUN apk update-ca-certificates
+
+# Now install everything else
+RUN apk --no-cache update && apk add --no-cache \
     php83 \
     php83-fpm \
     php83-mysqli \
