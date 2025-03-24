@@ -2,7 +2,7 @@ FROM alpine:3.20
 
 
 # Step 1: Install SSL certificates first to avoid HTTPS errors
-RUN apk update && apk add --no-cache ca-certificates
+#RUN apk update && apk add --no-cache ca-certificates
 
 # Step 2: Now you can update & install everything else
 RUN apk update && apk add --no-cache \
