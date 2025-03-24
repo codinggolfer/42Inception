@@ -1,10 +1,10 @@
 FROM alpine:3.20
 
 # Install CA certs first — don't run apk update yet
-RUN apk --no-cache add ca-certificates
+RUN apk add --no-cache ca-certificates
 
 # Update certs
-RUN update-ca-certificates
+RUN apk update ca-certificates
 
 # NOW run apk update and install everything else
 RUN apk update && apk add --no-cache \
