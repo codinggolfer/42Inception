@@ -2,7 +2,7 @@
 FROM alpine:3.20
 
 # Install MariaDB
-RUN apk update && apk add --no-cache mariadb mariadb-client bash
+RUN apk update && apk add --no-cache mariadb mariadb-client bash mariadb-common
 
 # Create required dirs and set ownership
 RUN mkdir -p /run/mysqld /var/lib/mysql \
@@ -24,5 +24,3 @@ CMD ["/bin/sh", "-c", "\
   fi && \
   exec mysqld --init-file=/init.sql \
 "]
-
-#pilllu

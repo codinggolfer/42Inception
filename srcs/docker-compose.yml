@@ -33,6 +33,7 @@ volumes:
     name: mariadb_data
   wordpress_data:
     driver: local
+    name: wordpress_data
 
 networks:
   inception:
