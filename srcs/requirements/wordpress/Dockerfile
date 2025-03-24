@@ -1,25 +1,29 @@
 FROM alpine:3.20
 
-# Install PHP and required extensions
-RUN apk update && apk add \
-  php83 \
-  php83-fpm \
-  php83-mysqli \
-  php83-curl \
-  php83-dom \
-  php83-exif \
-  php83-fileinfo \
-  php83-mbstring \
-  php83-opcache \
-  php83-session \
-  php83-zip \
-  php83-tokenizer \
-  php83-json \
-  php83-pecl-redis \
-  curl \
-  wget \
-  unzip \
-  bash
+
+# Step 1: Install SSL certificates first to avoid HTTPS errors
+RUN apk --no-cache add ca-certificates
+
+# Step 2: Now you can update & install everything else
+RUN apk update && apk add --no-cache \
+    php83 \
+    php83-fpm \
+    php83-mysqli \
+    php83-curl \
+    php83-dom \
+    php83-exif \
+    php83-fileinfo \
+    php83-mbstring \
+    php83-opcache \
+    php83-session \
+    php83-zip \
+    php83-tokenizer \
+    php83-json \
+    php83-pecl-redis \
+    curl \
+    wget \
+    unzip \
+    bash
 
 # Create folder for website
 RUN mkdir -p /var/www/wordpress
