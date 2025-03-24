@@ -1,26 +1,44 @@
 FROM alpine:3.20
 
-# FIX: install ca-certificates BEFORE apk update to fix SSL issue
-RUN apk update && add --no-cache  ca-certificates
+# Step 1: Install SSL certificates first to avoid HTTPS errors
+RUN apk --no-cache add ca-certificates
 
-# Now update + install tools
-RUN apk update && apk add --no-cache
+# Step 2: Now you can update & install everything else
+RUN apk update && apk add --no-cache \
+    php83 \
+    php83-fpm \
+    php83-mysqli \
+    php83-curl \
+    php83-dom \
+    php83-exif \
+    php83-fileinfo \
+    php83-mbstring \
+    php83-opcache \
+    php83-session \
+    php83-zip \
+    php83-tokenizer \
+    php83-json \
+    php83-pecl-redis \
+    curl \
+    wget \
+    unzip \
+    bash
 
-#RUN mkdir -p /var/www/wordpress
+RUN mkdir -p /var/www/wordpress
 
-# # Download and unpack WordPress
-# WORKDIR /var/www/wordpress
-# RUN curl -O https://wordpress.org/latest.tar.gz && \
-#     tar -xzf latest.tar.gz --strip-components=1 && \
-#     rm latest.tar.gz
+# Download and unpack WordPress
+WORKDIR /var/www/wordpress
+RUN curl -O https://wordpress.org/latest.tar.gz && \
+    tar -xzf latest.tar.gz --strip-components=1 && \
+    rm latest.tar.gz
 
-# # Copy custom entrypoint (we’ll write this next)
-# COPY tools/setup.sh /setup.sh
-# RUN chmod +x /setup.sh
+# Copy custom entrypoint (we’ll write this next)
+COPY tools/setup.sh /setup.sh
+RUN chmod +x /setup.sh
 
-# # Set working directory
-# WORKDIR /var/www/wordpress
+# Set working directory
+WORKDIR /var/www/wordpress
 
-# EXPOSE 9000
+EXPOSE 9000
 
-# CMD ["/setup.sh"]
+CMD ["/setup.sh"]
