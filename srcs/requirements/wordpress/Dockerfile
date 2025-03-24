@@ -1,7 +1,7 @@
 FROM alpine:3.20
 
 # Install PHP and required extensions
-RUN apk update && apk add --no-cache \
+RUN apk update && apk add \
   php82 \
   php82-fpm \
   php82-mysqli \
