@@ -2,7 +2,7 @@
 FROM alpine:3.20
 
 # Install MariaDB
-RUN apk update && apk add --no-cache mariadb mariadb-client bash mariadb-common
+RUN apk update && apk add --no-cache mariadb mariadb-client bash
 
 # Create required dirs and set ownership
 RUN mkdir -p /run/mysqld /var/lib/mysql \
