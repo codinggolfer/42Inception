@@ -10,4 +10,4 @@ sed -i "s/password_here/$MYSQL_PASSWORD/" wp-config.php
 sed -i "s/localhost/$MYSQL_HOST/" wp-config.php
 
 # Start PHP-FPM
-php-fpm82 -F
+php-fpm83 -F
