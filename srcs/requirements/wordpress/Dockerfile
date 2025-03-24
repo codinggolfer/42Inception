@@ -1,9 +1,12 @@
 FROM alpine:3.20
 
-# Step 1: Install SSL certificates first to avoid HTTPS errors
-RUN apk update && apk add --no-cache ca-certificates
+# Install CA certs first — don't run apk update yet
+RUN apk --no-cache add ca-certificates
 
-# Step 2: Now you can update & install everything else
+# Update certs
+RUN update-ca-certificates
+
+# NOW run apk update and install everything else
 RUN apk update && apk add --no-cache \
     php83 \
     php83-fpm \
