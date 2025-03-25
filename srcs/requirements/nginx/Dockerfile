@@ -1,5 +1,7 @@
 FROM alpine:3.20
 
+RUN sed -i 's/https/http/' /etc/apk/repositories
+
 RUN apk update && apk add --no-cache nginx openssl
 
 # Create directories for SSL certs and NGINX config
