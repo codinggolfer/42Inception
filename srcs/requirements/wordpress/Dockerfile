@@ -5,7 +5,7 @@ RUN sed -i 's/https/http/' /etc/apk/repositories
 
 RUN apk update && apk add --no-cache ca-certificates tzdata php83 php83-fpm php83-mysqli php83-curl \
   php83-dom php83-exif php83-fileinfo php83-mbstring php83-opcache php83-session php83-zip \
-  php83-tokenizer php83-json php83-pecl-redis curl wget unzip bash
+  php83-tokenizer php83-json php83-pecl-redis php83-phar curl wget unzip bash
 
 RUN update-ca-certificates
 # Install CA certs first — don't run apk update yet
