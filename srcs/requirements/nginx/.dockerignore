@@ -1,0 +1,31 @@
+**/.DS_Store
+**/*.log
+**/.env
+**/tmp
+**/node_modules
+**/__pycache__
+
+<!-- 
+Big images:
+If you have unnecessary files (logs, backups, local cache files), your Docker image becomes huge.
+
+Slow builds:
+Copying all files (especially big ones or folders like node_modules) slows down the build.
+
+Sensitive files:
+Accidentally copying files like .env, which contain passwords or secrets, is a security risk.
+
+Dirty containers:
+Temporary or OS files like .DS_Store or editor files can sneak in and clutter the image. 
+
+Nutshell:
+
+Keep images small and clean.
+
+Speed up builds.
+
+Avoid copying secrets.
+
+Prevent mistakes.
+
+-->
