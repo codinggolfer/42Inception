@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Wait for MariaDB to be ready
+echo "⏳ Waiting for database..."
+sleep 10
+
+
 # Set up wp-config.php with database info
 cp wp-config-sample.php wp-config.php
 
@@ -8,6 +13,8 @@ sed -i "s/database_name_here/$MYSQL_DATABASE/" wp-config.php
 sed -i "s/username_here/$MYSQL_USER/" wp-config.php
 sed -i "s/password_here/$MYSQL_PASSWORD/" wp-config.php
 sed -i "s/localhost/$MYSQL_HOST/" wp-config.php
+
+
 sed -i 's|127.0.0.1:9000|0.0.0.0:9000|' /etc/php*/php-fpm.d/www.conf
 
 if ! command -v wp > /dev/null; then
@@ -15,6 +22,8 @@ if ! command -v wp > /dev/null; then
   chmod +x wp-cli.phar
   mv wp-cli.phar /usr/local/bin/wp
 fi
+
+chown -R www-data:www-data /var/www/wordpress
 
 if ! wp core is-installed --allow-root; then
   wp core install \
