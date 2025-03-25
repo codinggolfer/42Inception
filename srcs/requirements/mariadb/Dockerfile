@@ -8,6 +8,8 @@ RUN apk update && apk add --no-cache mariadb mariadb-client bash
 RUN mkdir -p /run/mysqld /var/lib/mysql \
     && chown -R mysql:mysql /run/mysqld /var/lib/mysql
 
+RUN echo -e '[mysqld]\nport=3306\nbind-address=0.0.0.0' > /etc/my.cnf.d/mariadb-server.cnf
+
 # Copy init script
 COPY tools/init.sql /init.sql
 
@@ -17,7 +19,6 @@ USER mysql
 # Expose port
 EXPOSE 3306
 
-RUN echo -e '[mysqld]\nport=3306\nbind-address=0.0.0.0' > /etc/my.cnf.d/mariadb-server.cnf
 
 # Start MariaDB with init if datadir is empty
 CMD ["/bin/sh", "-c", "\
