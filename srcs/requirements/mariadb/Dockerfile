@@ -17,6 +17,8 @@ USER mysql
 # Expose port
 EXPOSE 3306
 
+RUN echo -e '[mysqld]\nport=3306\nbind-address=0.0.0.0' > /etc/my.cnf.d/mariadb-server.cnf
+
 # Start MariaDB with init if datadir is empty
 CMD ["/bin/sh", "-c", "\
   if [ ! -d /var/lib/mysql/mysql ]; then \
