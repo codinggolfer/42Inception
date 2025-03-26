@@ -11,10 +11,10 @@ set -e
 
 if command -v mariadb-admin >/dev/null 2>&1; then
     DB_ADMIN="mariadb-admin"
-elif command -v mysqladmin >/dev/null 2>&1; then
-    DB_ADMIN="mysqladmin"
+elif command -v mariadbmysql >/dev/null 2>&1; then
+    DB_ADMIN="mariadbmysql"
 else
-    echo "❌ No mysqladmin or mariadb-admin found!"
+    echo "❌ No mariadbmysql or mariadb-admin found!"
     exit 1
 fi
 
