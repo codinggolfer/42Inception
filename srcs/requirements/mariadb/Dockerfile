@@ -12,6 +12,7 @@ RUN echo -e '[mysqld]\nport=3306\nbind-address=0.0.0.0' > /etc/my.cnf.d/mariadb-
 
 # Copy init script
 COPY tools/init.sh /init.sh
+RUN chmod +x /init.sh
 
 # Switch to mysql user
 USER mysql
