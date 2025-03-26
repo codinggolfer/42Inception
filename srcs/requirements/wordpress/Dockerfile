@@ -9,10 +9,15 @@ RUN apk update && apk add --no-cache ca-certificates tzdata php83 php83-fpm php8
 
 RUN update-ca-certificates
 
-RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-    chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
+# RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+#     chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 
-RUN mkdir -p /var/www/wordpress
+RUN mkdir -p /var/www/wordpress && \
+	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+	chmod +x wp-cli.phar && \
+	mv wp-cli.phar /usr/local/bin/wp
+
+# RUN mkdir -p /var/www/wordpress
 
 # Download and unpack WordPress
 WORKDIR /var/www/wordpress
