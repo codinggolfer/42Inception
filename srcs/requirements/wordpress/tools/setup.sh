@@ -28,23 +28,24 @@ if ! command -v wp > /dev/null; then
   mv wp-cli.phar /usr/local/bin/wp
 fi
 
-chown -R www-data:www-data /var/www/wordpress
 
 if ! wp core is-installed --allow-root; then
   wp core install \
-    --url="https://$DOMAIN_NAME" \
-    --title="Inception Site" \
-    --admin_user=superuser \
-    --admin_password=supersecurepass \
-    --admin_email=you@example.com \
-    --skip-email \
+    --url=$DOMAIN_NAME \
+    --title=$WORDPRESS_TITLE \
+    --admin_user=$WORDPRESS_ADMIN \
+    --admin_password=$WORDPRESS_ADMIN_PASSWORD \
+    --admin_email=$WORDPRESS_ADMIN_EMAIL \
     --allow-root
 
-  wp user create editoruser editor@example.com \
-    --role=editor \
-    --user_pass=editorpass \
-    --allow-root
+  wp user create \
+	$WORDPRESS_USER $WORDPRESS_USER_EMAIL \
+    	--user_pass=$WORDPRESS_USER_PASSWORD \
+        --allow-root
 fi
+
+chown -R www-data:www-data /var/www/wordpress
+chmod -R 755 /var/www/wordpress/wp-content
 
 echo "Starting PHP-FPM..."
 # Start PHP-FPM
