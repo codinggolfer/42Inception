@@ -21,10 +21,10 @@ services:
     healthcheck:
       test: [
         "CMD-SHELL",
-        "mysqladmin ping -h 127.0.0.1 -u${MYSQL_USER} -p${MYSQL_PASSWORD} --silent"
+        "mysqladmin ping -h 127.0.0.1 -u${MYSQL_USER} -p${MYSQL_PASSWORD}"
       ]
-      interval: 3s
-      timeout: 5s
+      interval: 10s
+      timeout: 10s
       retries: 20
 
   wordpress:
