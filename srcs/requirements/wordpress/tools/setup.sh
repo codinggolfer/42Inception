@@ -2,28 +2,12 @@
 
 set -e
 
-# # Wait for MariaDB to be ready
-# echo "Waiting for MariaDB to start..."
-# until mariadb-admin ping --protocol=tcp --host=mariadb -u"$MYSQL_USER" --password="$MYSQL_PASSWORD" --wait >/dev/null 2>&1; do                                    
-# 	sleep 2                                                                                                                                                      
-# done
-# echo "MariaDB is up and running!"
-
-if command -v mariadb-admin >/dev/null 2>&1; then
-    DB_ADMIN="mariadb-admin"
-elif command -v mariadbmysql >/dev/null 2>&1; then
-    DB_ADMIN="mariadbmysql"
-else
-    echo "❌ No mariadbmysql or mariadb-admin found!"
-    exit 1
-fi
-
 # Wait for MariaDB to be ready
-echo "⏳ Waiting for MariaDB to be ready..."
-until $DB_ADMIN ping -h"$DB_HOST" --silent; do
-    sleep 1
+echo "Waiting for MariaDB to start..."
+until mariadb-admin ping --protocol=tcp --host=$MYSQL_HOST -u"$MYSQL_USER" --password="$MYSQL_PASSWORD" --wait >/dev/null 2>&1; do                                    
+	sleep 2                                                                                                                                                      
 done
-echo "✅ MariaDB is ready!"
+echo "MariaDB is up and running!"
 
 cd /var/www/wordpress
 

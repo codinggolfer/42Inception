@@ -11,7 +11,7 @@ RUN mkdir -p /run/mysqld /var/lib/mysql \
 RUN echo -e '[mysqld]\nport=3306\nbind-address=0.0.0.0' > /etc/my.cnf.d/mariadb-server.cnf
 
 # Copy init script
-COPY tools/init.sql /init.sql
+COPY tools/init.sh /init.sh
 
 # Switch to mysql user
 USER mysql
@@ -25,5 +25,5 @@ CMD ["/bin/sh", "-c", "\
   if [ ! -d /var/lib/mysql/mysql ]; then \
     mariadb-install-db --user=mysql --datadir=/var/lib/mysql > /dev/null; \
   fi && \
-  exec mysqld --init-file=/init.sql \
+  exec mysqld --init-file=/init.sh \
 "]
