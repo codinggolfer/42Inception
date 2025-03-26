@@ -18,6 +18,14 @@ services:
       - mariadb_data:/var/lib/mysql
     networks:
       - inception
+    healthcheck:
+      test: [
+        "CMD-SHELL",
+        "mysqladmin ping -h 127.0.0.1 -u${MYSQL_USER} -p${MYSQL_PASSWORD} --silent"
+      ]
+      interval: 3s
+      timeout: 5s
+      retries: 20
 
   wordpress:
     build:
@@ -38,12 +46,13 @@ services:
       - DOMAIN_NAME=${DOMAIN_NAME}
     restart: always
     env_file: .env
-    depends_on:
-      - mariadb
     volumes:
       - wordpress_data:/var/www/wordpress
     networks:
       - inception
+    depends_on:
+      mariadb:
+        condition: service_healthy
 
   nginx:
     build:
