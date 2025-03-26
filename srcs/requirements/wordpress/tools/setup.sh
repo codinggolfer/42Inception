@@ -4,13 +4,11 @@ set -e
 
 # Wait for MariaDB to be ready
 echo "Waiting for MariaDB to start..."
-until mysqladmin ping --protocol=tcp --host="$MYSQL_HOST" -u "$MYSQL_USER" --password="$MYSQL_PASSWORD" --wait >/dev/null 2>&1; do                                    
-	echo "⏳ Still waiting for MariaDB at $MYSQL_HOST..."
+until mysqladmin ping --protocol=tcp --host="$MYSQL_HOST" -u "$MYSQL_USER" --password="$MYSQL_PASSWORD" -e "SELECT 1;" >/dev/null 2>&1; do                                    
+	echo "⏳ Still waiting for MariaDB with user $MYSQL_USER......"
 	sleep 2                                                                                                                                                      
 done
 echo "MariaDB is up and running!"
-
-cd /var/www/wordpress
 
 # Set up wp-config.php with database info
 cp wp-config-sample.php wp-config.php
