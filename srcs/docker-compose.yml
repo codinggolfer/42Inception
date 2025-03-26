@@ -39,7 +39,7 @@ services:
     restart: always
     env_file: .env
     depends_on:
-      mariadb
+      - mariadb
     volumes:
       - wordpress_data:/var/www/wordpress
     networks:
