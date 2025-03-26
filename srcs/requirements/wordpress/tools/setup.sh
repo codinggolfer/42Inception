@@ -1,9 +1,14 @@
 #!/bin/sh
 
-# Wait for MariaDB to be ready
-echo "⏳ Waiting for database..."
-sleep 10
+set -e
 
+# Wait for MariaDB to be ready
+echo "Waiting for MariaDB to start..."
+until mariadb-admin ping --protocol=tcp --host=mariadb -u"$MYSQL_USER" --password="$MYSQL_PASSWORD" --wait >/dev/null 2>&1; do                                    
+	sleep 2                                                                                                                                                       
+done
+
+echo "MariaDB is up and running!"
 
 # Set up wp-config.php with database info
 cp wp-config-sample.php wp-config.php
@@ -41,5 +46,6 @@ if ! wp core is-installed --allow-root; then
     --allow-root
 fi
 
+echo "Starting PHP-FPM..."
 # Start PHP-FPM
 php-fpm83 -F
