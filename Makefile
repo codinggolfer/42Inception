@@ -2,7 +2,9 @@ NAME = inception
 
 SRC_DIR = srcs
 
-all: 
+all:
+	@mkdir -p /home/eagbomei/data/wordpress
+	@mkdir -p /home/eagbomei/data/mariadb
 	@echo "Building and starting $(NAME)..."
 	docker-compose -f $(SRC_DIR)/docker-compose.yml up --build
 
