@@ -4,7 +4,7 @@ set -e
 
 # Wait for MariaDB to be ready
 echo "Waiting for MariaDB to start..."
-until mysqladmin ping --protocol=tcp --host="$MYSQL_HOST" -u "root" --password="$MYSQL_ROOT_PASSWORD" --wait >/dev/null 2>&1; do                                    
+until mysqladmin ping --protocol=tcp --host="$MYSQL_HOST" -u "$MYSQL_USER" --password="$MYSQL_PASSWORD" --wait >/dev/null 2>&1; do                                    
 	echo "⏳ Still waiting for MariaDB at $MYSQL_HOST..."
 	sleep 2                                                                                                                                                      
 done
