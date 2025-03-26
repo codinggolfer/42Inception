@@ -21,12 +21,9 @@ RUN curl -O https://wordpress.org/latest.tar.gz && \
     rm latest.tar.gz
 
 # Copy custom entrypoint (we’ll write this next)
-COPY tools/setup.sh /usr/local/bin/setup.sh
-RUN chmod +x /usr/local/bin/setup.sh
-
-# Set working directory
-WORKDIR /var/www/wordpress
+COPY tools/setup.sh /setup.sh
+RUN chmod +x /setup.sh
 
 EXPOSE 9000
 
-ENTRYPOINT ["/usr/local/bin/setup.sh"]
+CMD ["./setup.sh"]
