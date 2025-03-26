@@ -4,7 +4,7 @@ SRC_DIR = srcs
 
 all: 
 	@echo "Building and starting $(NAME)..."
-	docker-compose -f $(SRC_DIR)/docker-compose.yml up --build -d
+	docker-compose -f $(SRC_DIR)/docker-compose.yml up --build
 
 down:
 	@echo "Stopping and removing containers..."
