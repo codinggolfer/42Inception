@@ -9,7 +9,7 @@ set -e
 # 	sleep 2                                                                                                                                                      
 # done
 # echo "MariaDB is up and running!"
-
+ls -la
 # Set up wp-config.php with database info
 cp wp-config-sample.php wp-config.php
 
