@@ -21,9 +21,4 @@ EXPOSE 3306
 
 
 # Start MariaDB with init if datadir is empty
-CMD ["/bin/sh", "-c", "\
-  if [ ! -d /var/lib/mysql/mysql ]; then \
-    mariadb-install-db --user=mysql --datadir=/var/lib/mysql > /dev/null; \
-  fi && \
-  exec mysqld --init-file=/init.sh \
-"]
+CMD ["/init.sh"]
