@@ -10,6 +10,8 @@ echo "Waiting for MariaDB to start..."
 
 echo "MariaDB is up and running!"
 
+cd /var/www/wordpress
+
 # Set up wp-config.php with database info
 cp wp-config-sample.php wp-config.php
 
