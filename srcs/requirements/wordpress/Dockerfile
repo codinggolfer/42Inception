@@ -12,15 +12,15 @@ RUN update-ca-certificates
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
     chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 
-RUN mkdir -p /var/www/wordpress
+RUN mkdir -p /var/www/html
 
 # Download and unpack WordPress
-WORKDIR /var/www/wordpress
-RUN chown -R 775 /var/www/wordpress
+WORKDIR /var/www/html
+RUN chown -R 775 /var/www/html
 
-# RUN curl -O https://wordpress.org/latest.tar.gz && \
-# tar -xzf latest.tar.gz --strip-components=1 && \
-# rm latest.tar.gz
+RUN curl -O https://wordpress.org/latest.tar.gz && \
+tar -xzf latest.tar.gz --strip-components=1 && \
+rm latest.tar.gz
 
 COPY conf/www.conf /etc/php83/php-fpm.d/www.conf
 

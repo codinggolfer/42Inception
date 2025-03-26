@@ -44,8 +44,8 @@ if ! wp core is-installed --allow-root; then
         --allow-root
 fi
 
-chown -R www-data:www-data /var/www/wordpress
-chmod -R 755 /var/www/wordpress/wp-content
+chown -R www-data:www-data /var/www/html
+chmod -R 755 /var/www/html
 
 echo "Starting PHP-FPM..."
 # Start PHP-FPM

@@ -47,7 +47,7 @@ services:
     restart: always
     env_file: .env
     volumes:
-      - wordpress_data:/var/www/wordpress
+      - wordpress_data:/var/www/html
     networks:
       - inception
     depends_on:
@@ -63,7 +63,7 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wordpress_data:/var/www/wordpress
+      - wordpress_data:/var/www/html
     ports:
       - "443:443"
     networks:
