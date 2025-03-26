@@ -8,7 +8,7 @@ RUN apk update && apk add --no-cache nginx openssl
 RUN mkdir -p /etc/nginx/ssl /run/nginx
 
 
-RUN		chown -R www-data:www-data /etc/nginx
+# RUN		chown -R www-data:www-data /etc/nginx
 
 VOLUME	/var/www/html
 WORKDIR	/var/www/html
