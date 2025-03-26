@@ -2,13 +2,28 @@
 
 set -e
 
-# Wait for MariaDB to be ready
-echo "Waiting for MariaDB to start..."
+# # Wait for MariaDB to be ready
+# echo "Waiting for MariaDB to start..."
 # until mariadb-admin ping --protocol=tcp --host=mariadb -u"$MYSQL_USER" --password="$MYSQL_PASSWORD" --wait >/dev/null 2>&1; do                                    
-	sleep 30                                                                                                                                                       
+# 	sleep 2                                                                                                                                                      
 # done
+# echo "MariaDB is up and running!"
 
-echo "MariaDB is up and running!"
+if command -v mariadb-admin >/dev/null 2>&1; then
+    DB_ADMIN="mariadb-admin"
+elif command -v mysqladmin >/dev/null 2>&1; then
+    DB_ADMIN="mysqladmin"
+else
+    echo "❌ No mysqladmin or mariadb-admin found!"
+    exit 1
+fi
+
+# Wait for MariaDB to be ready
+echo "⏳ Waiting for MariaDB to be ready..."
+until $DB_ADMIN ping -h"$DB_HOST" --silent; do
+    sleep 1
+done
+echo "✅ MariaDB is ready!"
 
 cd /var/www/wordpress
 
@@ -22,7 +37,7 @@ sed -i "s/password_here/$MYSQL_PASSWORD/" wp-config.php
 sed -i "s/localhost/$MYSQL_HOST/" wp-config.php
 
 
-sed -i 's|127.0.0.1:9000|0.0.0.0:9000|' /etc/php*/php-fpm.d/www.conf
+sed -i 's|127.0.0.1:9000|0.0.0.0:9000|' /etc/php83/php-fpm.d/www.conf
 
 if ! command -v wp > /dev/null; then
   curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
