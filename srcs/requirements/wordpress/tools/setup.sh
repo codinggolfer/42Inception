@@ -39,8 +39,8 @@ if ! wp core is-installed --allow-root; then
     --allow-root
 
   wp user create \
-	$WORDPRESS_USER $WORDPRESS_USER_EMAIL \
-    	--user_pass=$WORDPRESS_USER_PASSWORD \
+	$WORDPRESS_OTHER $WORDPRESS_OTHER_EMAIL \
+    	--user_pass=$WORDPRESS_OTHER_PASSWORD \
         --allow-root
 fi
 
