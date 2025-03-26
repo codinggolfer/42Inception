@@ -10,7 +10,6 @@ set -e
 
 echo "Setting up database and users..."
 mysqld --bootstrap --datadir=/var/lib/mysql --user=mysql <<-EOF
-USE mysql;
 FLUSH PRIVILEGES;
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
 CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
