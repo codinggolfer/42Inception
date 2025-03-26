@@ -26,4 +26,4 @@ RUN chmod +x /setup.sh
 
 EXPOSE 9000
 
-CMD ["./setup.sh"]
+CMD ["/setup.sh"]
