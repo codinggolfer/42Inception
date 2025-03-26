@@ -7,6 +7,11 @@ RUN apk update && apk add --no-cache nginx openssl
 # Create directories for SSL certs and NGINX config
 RUN mkdir -p /etc/nginx/ssl /run/nginx
 
+
+RUN		chown -R www-data:www-data /etc/nginx
+
+VOLUME	/var/www/html
+WORKDIR	/var/www/html
 # Copy nginx config and certs
 COPY conf/default.conf /etc/nginx/http.d/default.conf
 COPY tools/ssl/ /etc/nginx/ssl/
