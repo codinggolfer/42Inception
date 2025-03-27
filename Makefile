@@ -7,7 +7,7 @@ all:
 	@mkdir -p /home/eagbomei/data/mariadb
 	@echo "Building and starting $(NAME)..."
 	docker compose -f $(SRC_DIR)/docker-compose.yml --env-file $(ENV_FILE) up --build -d
-	@ready
+	@echo ready
 
 down:
 	@echo "Stopping and removing containers..."
