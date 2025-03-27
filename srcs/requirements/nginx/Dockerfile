@@ -14,7 +14,14 @@ VOLUME	/var/www/html
 WORKDIR	/var/www/html
 # Copy nginx config and certs
 COPY conf/default.conf /etc/nginx/http.d/default.conf
-COPY tools/ssl/ /etc/nginx/ssl/
+
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+-keyout /etc/nginx/ssl/key.pem \
+-out /etc/nginx/ssl/cert.pem \
+-subj "/C=FI/ST=Uusimaa/L=Helsinki/CN=$DOMAIN_NAME"
+
+RUN chmod 600 /etc/nginx/ssl/key.pem
+RUN chmod 600 /etc/nginx/ssl/cert.pem
 
 EXPOSE 443
 

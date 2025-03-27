@@ -19,7 +19,7 @@ if ! command -v wp > /dev/null; then
   mv wp-cli.phar /usr/local/bin/wp
 fi
 
-
+#CREATE USERS
 if ! wp core is-installed --allow-root; then
   wp core install \
     --url=$DOMAIN_NAME \
@@ -35,6 +35,7 @@ if ! wp core is-installed --allow-root; then
         --allow-root
 fi
 
+#give permissions and change ownership
 chown -R www-data:www-data /var/www/html
 chmod -R 755 /var/www/html
 
