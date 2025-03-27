@@ -6,7 +6,7 @@ all:
 	@mkdir -p /home/eagbomei/data/wordpress
 	@mkdir -p /home/eagbomei/data/mariadb
 	@echo "Building and starting $(NAME)..."
-	docker compose -f $(SRC_DIR)/docker-compose.yml up --env-file $(ENV_FILE) --build -d
+	docker compose -f $(SRC_DIR)/docker-compose.yml up --env-file $(ENV_FILE) up --build -d
 	@ready
 
 down:
