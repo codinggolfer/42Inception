@@ -2,25 +2,25 @@
 
 set -e
 
-# cp wp-config-sample.php wp-config.php
+cd /var/www/html
 
-# # Replace DB settings using environment variables
-# sed -i "s/database_name_here/$MYSQL_DATABASE/" wp-config.php
-# sed -i "s/username_here/$MYSQL_USER/" wp-config.php
-# sed -i "s/password_here/$MYSQL_PASSWORD/" wp-config.php
-# sed -i "s/localhost/$MYSQL_HOST/" wp-config.php
+cp wp-config-sample.php wp-config.php
+
+
+# Replace DB settings using environment variables
+sed -i "s/database_name_here/$MYSQL_DATABASE/" wp-config.php
+sed -i "s/username_here/$MYSQL_USER/" wp-config.php
+sed -i "s/password_here/$MYSQL_PASSWORD/" wp-config.php
+sed -i "s/localhost/$MYSQL_HOST/" wp-config.php
 
 
 sed -i 's|127.0.0.1:9000|0.0.0.0:9000|' /etc/php83/php-fpm.d/www.conf
 
+#
 if ! command -v wp > /dev/null; then
   curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
   chmod +x wp-cli.phar
   mv wp-cli.phar /usr/local/bin/wp
-
-  	wp core download --allow-root
-	wp config create --allow-root --dbhost=mariadb --dbuser="$MYSQL_USER" \
-    --dbpass="$MYSQL_PASSWORD" --dbname="$MYSQL_DATABASE"
 fi
 
 #CREATE USERS

@@ -18,9 +18,11 @@ clean: down
 
 fclean: clean
 	@echo "Removing all images..."
-	docker rmi srcs-nginx srcs-wordpress srcs-mariadb || true
-	sudo rm -rf /home/eagbomei/data/wordpress
-	sudo rm -rf /home/eagbomei/data/mariadb
+	@docker system prune --all --force --volumes
+	@docker network prune --force
+	@docker volume prune --force
+	@sudo rm -rf /home/eagbomei/data/wordpress
+	@sudo rm -rf /home/eagbomei/data/mariadb
 
 re: fclean all
 
