@@ -14,7 +14,7 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
-      - inception
+      - docker-network
     healthcheck:
       test: [
         "CMD-SHELL",
@@ -46,7 +46,7 @@ services:
     volumes:
       - wordpress_data:/var/www/html
     networks:
-      - inception
+      - docker-network
     depends_on:
       mariadb:
         condition: service_healthy
@@ -64,7 +64,7 @@ services:
     ports:
       - "443:443"
     networks:
-      - inception
+      - docker-network
 
 volumes:
   mariadb_data:
@@ -81,5 +81,5 @@ volumes:
       device: /home/eagbomei/data/wordpress
 
 networks:
-  inception:
+  docker-network:
     driver: bridge
