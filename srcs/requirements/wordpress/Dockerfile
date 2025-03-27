@@ -1,6 +1,8 @@
 FROM alpine:3.20.5
 
 
+RUN 
+
 RUN sed -i 's/https/http/' /etc/apk/repositories
 
 RUN apk update && apk add --no-cache ca-certificates tzdata php83 php83-fpm php83-mysqli php83-curl \
